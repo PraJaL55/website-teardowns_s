@@ -1216,6 +1216,10 @@ footer {
 	border: solid 2px #2390bf;
 }
 
+.mac-pic {
+	max-width:initial;
+}
+
 .meta-author {
     font-size: 11px;
     color: #000000;

@@ -29,7 +29,7 @@ get_header(); ?>
 					</div>
 				</div>
 				<div class="col-sm-6 wow fadeInRightBig" data-wow-duration="1s" data-wow-delay="0.2s">
-					<img src="<?php echo get_template_directory_uri(); ?>/img/mac.png" alt=""/>
+					<img class="mac-pic" src="<?php echo get_template_directory_uri(); ?>/img/mac.png" alt=""/>
 				</div>
 			</div>
 		</div>
@@ -84,7 +84,7 @@ get_header(); ?>
 			</div>
 			<div class="row">
 				<div class="col-md-3 col-sm-6 wow fadeInUpBig" data-wow-duration="1s" data-wow-delay=".1s">
-					<a href="./subpage.html">
+					<a href="<?php echo get_template_directory_uri(); ?>/subpage.php">
 						<div class="project-wrapper">
 							<div class="project-client"><img src="<?php echo get_template_directory_uri(); ?>/img/clients/medium/1.png" class="img-responsive" alt=""/></div>
 							<div class="project-thumb">
@@ -101,7 +101,7 @@ get_header(); ?>
 					</a>
 				</div>
 				<div class="col-md-3 col-sm-6 wow fadeInUpBig" data-wow-duration="1s" data-wow-delay=".3s">
-					<a href="./subpage.html">
+					<a href="<?php echo get_template_directory_uri(); ?>/subpage.php">
 						<div class="project-wrapper">
 							<div class="project-client"><img src="<?php echo get_template_directory_uri(); ?>/img/clients/medium/2.png" class="img-responsive" alt=""/></div>
 							<div class="project-thumb">
@@ -118,7 +118,7 @@ get_header(); ?>
 					</a>
 				</div>
 				<div class="col-md-3 col-sm-6 wow fadeInUpBig" data-wow-duration="1s" data-wow-delay=".5s">
-					<a href="./subpage.html">
+					<a href="<?php echo get_template_directory_uri(); ?>/subpage.php">
 						<div class="project-wrapper">
 							<div class="project-client"><img src="<?php echo get_template_directory_uri(); ?>/img/clients/medium/3.png" class="img-responsive" alt=""/></div>
 							<div class="project-thumb">
@@ -136,7 +136,7 @@ get_header(); ?>
 					</a>
 				</div>
 				<div class="col-md-3 col-sm-6 wow fadeInUpBig" data-wow-duration="1s" data-wow-delay=".7s">
-					<a href="./subpage.html">
+					<a href="<?php echo get_template_directory_uri(); ?>/subpage.php">
 						<div class="project-wrapper">
 							<div class="project-client"><img src="<?php echo get_template_directory_uri(); ?>/img/clients/medium/4.png" class="img-responsive" alt=""/></div>
 							<div class="project-thumb">
@@ -155,7 +155,7 @@ get_header(); ?>
 			</div>
 			<div class="row">
 				<div class="col-md-3 col-sm-6 wow fadeInUpBig" data-wow-duration="1s" data-wow-delay=".1s">
-					<a href="./subpage.html">
+					<a href="<?php echo get_template_directory_uri(); ?>/subpage.php">
 						<div class="project-wrapper">
 							<div class="project-client"><img src="<?php echo get_template_directory_uri(); ?>/img/clients/medium/5.png" class="img-responsive" alt=""/></div>
 							<div class="project-thumb">
@@ -172,7 +172,7 @@ get_header(); ?>
 					</a>
 				</div>
 				<div class="col-md-3 col-sm-6 wow fadeInUpBig" data-wow-duration="1s" data-wow-delay=".3s">
-					<a href="./subpage.html">
+					<a href="<?php echo get_template_directory_uri(); ?>/subpage.php">
 						<div class="project-wrapper">
 							<div class="project-client"><img src="<?php echo get_template_directory_uri(); ?>/img/clients/medium/6.png" class="img-responsive" alt=""/></div>
 							<div class="project-thumb">
@@ -189,7 +189,7 @@ get_header(); ?>
 					</a>
 				</div>
 				<div class="col-md-3 col-sm-6 wow fadeInUpBig" data-wow-duration="1s" data-wow-delay=".5s">
-					<a href="./subpage.html">
+					<a href="<?php echo get_template_directory_uri(); ?>/subpage.php">
 						<div class="project-wrapper">
 							<div class="project-client"><img src="<?php echo get_template_directory_uri(); ?>/img/clients/medium/7.png" class="img-responsive" alt=""/></div>
 							<div class="project-thumb">
@@ -206,7 +206,7 @@ get_header(); ?>
 					</a>
 				</div>
 				<div class="col-md-3 col-sm-6 wow fadeInUpBig" data-wow-duration="1s" data-wow-delay=".7s">
-					<a href="./subpage.html">
+					<a href="<?php echo get_template_directory_uri(); ?>/subpage.php">
 						<div class="project-wrapper">
 							<div class="project-client"><img src="<?php echo get_template_directory_uri(); ?>/img/clients/medium/8.png" class="img-responsive" alt=""/></div>
 							<div class="project-thumb">
@@ -225,7 +225,7 @@ get_header(); ?>
 			</div>
 			<div class="row">
 				<div class="col-md-3 col-sm-6 wow fadeInUpBig" data-wow-duration="1s" data-wow-delay=".1s">
-					<a href="./subpage.html">
+					<a href="<?php echo get_template_directory_uri(); ?>/subpage.php">
 						<div class="project-wrapper">
 							<div class="project-client"><img src="<?php echo get_template_directory_uri(); ?>/img/clients/medium/1.png" class="img-responsive" alt=""/></div>
 							<div class="project-thumb">
@@ -242,7 +242,7 @@ get_header(); ?>
 					</a>
 				</div>
 				<div class="col-md-3 col-sm-6 wow fadeInUpBig" data-wow-duration="1s" data-wow-delay=".3s">
-					<a href="./subpage.html">
+					<a href="<?php echo get_template_directory_uri(); ?>/subpage.php">
 						<div class="project-wrapper">
 							<div class="project-client"><img src="<?php echo get_template_directory_uri(); ?>/img/clients/medium/2.png" class="img-responsive" alt=""/></div>
 							<div class="project-thumb">
@@ -259,7 +259,7 @@ get_header(); ?>
 					</a>
 				</div>
 				<div class="col-md-3 col-sm-6 wow fadeInUpBig" data-wow-duration="1s" data-wow-delay=".5s">
-					<a href="./subpage.html">
+					<a href="<?php echo get_template_directory_uri(); ?>/subpage.php">
 						<div class="project-wrapper">
 							<div class="project-client"><img src="<?php echo get_template_directory_uri(); ?>/img/clients/medium/3.png" class="img-responsive" alt=""/></div>
 							<div class="project-thumb">
@@ -276,7 +276,7 @@ get_header(); ?>
 					</a>
 				</div>
 				<div class="col-md-3 col-sm-6 wow fadeInUpBig" data-wow-duration="1s" data-wow-delay=".7s">
-					<a href="<?php echo get_template_directory_uri(); ?>/subpage.html">
+					<a href="<?php echo get_template_directory_uri(); ?>/subpage.php">
 						<div class="project-wrapper">
 							<div class="project-client"><img src="<?php echo get_template_directory_uri(); ?>/img/clients/medium/4.png" class="img-responsive" alt=""/></div>
 							<div class="project-thumb">
@@ -306,7 +306,7 @@ get_header(); ?>
 		<div class="container">
 			<div class="row">
 				<div class="col-sm-6 wow fadeInUpBig" data-wow-duration="1s" data-wow-delay=".1s">
-					<a href="./subpage.html">
+					<a href="<?php echo get_template_directory_uri(); ?>/subpage.php">
 						<div class="featured-project">
 							<div class="members">
 								<span><img src="<?php echo get_template_directory_uri(); ?>/img/members/1.png" class="img-responsive" alt=""/></span>
@@ -324,7 +324,7 @@ get_header(); ?>
 					</a>
 				</div>
 				<div class="col-sm-6 wow fadeInUpBig" data-wow-duration="1s" data-wow-delay=".3s">
-					<a href="./subpage.html">
+					<a href="<?php echo get_template_directory_uri(); ?>/subpage.php">
 						<div class="featured-project">
 							<div class="members">
 								<span><img src="<?php echo get_template_directory_uri(); ?>/img/members/1.png" class="img-responsive" alt=""/></span>
@@ -356,7 +356,7 @@ get_header(); ?>
 		<div class="container">
 			<div class="row">
 				<div class="col-sm-4 wow fadeInUpBig" data-wow-duration="1s" data-wow-delay=".1s">
-					<a href="./subpage.html">
+					<a href="<?php echo get_template_directory_uri(); ?>/subpage.php">
 						<div class="featured-project tp-project">
 							<div class="members">
 								<span><img src="<?php echo get_template_directory_uri(); ?>/img/members/2.png" class="img-responsive" alt=""/></span>
@@ -373,7 +373,7 @@ get_header(); ?>
 					</a>
 				</div>
 				<div class="col-sm-4 wow fadeInUpBig" data-wow-duration="1s" data-wow-delay=".3s">
-					<a href="./subpage.html">
+					<a href="<?php echo get_template_directory_uri(); ?>/subpage.php">
 						<div class="featured-project tp-project">
 							<div class="members">
 								<span><img src="<?php echo get_template_directory_uri(); ?>/img/members/2.png" class="img-responsive" alt=""/></span>
@@ -389,7 +389,7 @@ get_header(); ?>
 					</a>
 				</div>
 				<div class="col-sm-4 wow fadeInUpBig" data-wow-duration="1s" data-wow-delay=".5s">
-					<a href="./subpage.html">
+					<a href="<?php echo get_template_directory_uri(); ?>/subpage.php">
 						<div class="featured-project tp-project">
 							<div class="members">
 								<span><img src="<?php echo get_template_directory_uri(); ?>/img/members/2.png" class="img-responsive" alt=""/></span>

@@ -59,7 +59,7 @@
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="./index.html"><img src="img/logo.png" class="img-responsive" alt=""/></a>
+				<a class="navbar-brand" href="./index.php"><img src="img/logo.png" class="img-responsive" alt=""/></a>
 			</div>
 			<div class="pull-right logreg">
 				<a href="#" class="login"><span class="hidden visible-pm"><i class="fa fa-sign-in"></i></span> <span class="hide-pm">Sign in</span></a>
@@ -68,9 +68,9 @@
 			<div id="navbar2" class="navbar-collapse collapse">
 				<ul class="nav navbar-nav">
 					<li class="dropdown">
-						<a href="./index.html" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Features <span><i class="fa fa-angle-down"></i></span></a>
+						<a href="./index.php" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Features <span><i class="fa fa-angle-down"></i></span></a>
 						<ul class="dropdown-menu">
-							<li><a href="./index.html">Homepage 1</a></li>
+							<li><a href="./index.php">Homepage 1</a></li>
 							<li><a href="./home2.html">Homepage 2</a></li>
 							<li><a href="./home3.html">Homepage 3</a></li>
 						</ul>

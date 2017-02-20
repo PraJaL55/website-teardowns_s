@@ -133,6 +133,163 @@ function website_teardown_scripts() {
 add_action( 'wp_enqueue_scripts', 'website_teardown_scripts' );
 
 /**
+ * Get all CPT UI Post Types
+ */
+function cptui_register_my_cpts() {
+
+	/**
+	 * Post Type: Website Teardowns.
+	 */
+
+	$labels = array(
+		"name" => __( 'Website Teardowns', 'gabfire' ),
+		"singular_name" => __( 'Website Teardown', 'gabfire' ),
+	);
+
+	$args = array(
+		"label" => __( 'Website Teardowns', 'gabfire' ),
+		"labels" => $labels,
+		"description" => "This post type is for website teardowns.",
+		"public" => true,
+		"publicly_queryable" => true,
+		"show_ui" => true,
+		"show_in_rest" => true,
+		"rest_base" => "website_teardowns",
+		"has_archive" => true,
+		"show_in_menu" => true,
+		"exclude_from_search" => false,
+		"capability_type" => "post",
+		"map_meta_cap" => true,
+		"hierarchical" => false,
+		"rewrite" => array( "slug" => "teardowns", "with_front" => true ),
+		"query_var" => true,
+		"menu_position" => 5,
+		"supports" => array( "title", "editor", "thumbnail", "excerpt", "trackbacks", "custom-fields", "comments", "revisions", "author" ),
+	);
+
+	register_post_type( "teardowns", $args );
+}
+
+add_action( 'init', 'cptui_register_my_cpts' );
+
+
+/**
+ * Get all CPT UI Taxonomies
+ */
+function cptui_register_my_taxes() {
+
+	/**
+	 * Taxonomy: Teardown Categories.
+	 */
+
+	$labels = array(
+		"name" => __( 'Teardown Categories', 'gabfire' ),
+		"singular_name" => __( 'Teardown Category', 'gabfire' ),
+	);
+
+	$args = array(
+		"label" => __( 'Teardown Categories', 'gabfire' ),
+		"labels" => $labels,
+		"public" => true,
+		"hierarchical" => true,
+		"label" => "Teardown Categories",
+		"show_ui" => true,
+		"show_in_menu" => true,
+		"show_in_nav_menus" => true,
+		"query_var" => true,
+		"rewrite" => array( 'slug' => 'teardown_category', 'with_front' => true, ),
+		"show_admin_column" => false,
+		"show_in_rest" => false,
+		"rest_base" => "",
+		"show_in_quick_edit" => false,
+	);
+	register_taxonomy( "teardown_category", array( "teardowns" ), $args );
+
+	/**
+	 * Taxonomy: Teardown Tags.
+	 */
+
+	$labels = array(
+		"name" => __( 'Teardown Tags', 'gabfire' ),
+		"singular_name" => __( 'Teardown Tag', 'gabfire' ),
+	);
+
+	$args = array(
+		"label" => __( 'Teardown Tags', 'gabfire' ),
+		"labels" => $labels,
+		"public" => true,
+		"hierarchical" => false,
+		"label" => "Teardown Tags",
+		"show_ui" => true,
+		"show_in_menu" => true,
+		"show_in_nav_menus" => true,
+		"query_var" => true,
+		"rewrite" => array( 'slug' => 'teardown_tags', 'with_front' => true, ),
+		"show_admin_column" => false,
+		"show_in_rest" => false,
+		"rest_base" => "",
+		"show_in_quick_edit" => false,
+	);
+	register_taxonomy( "teardown_tags", array( "teardowns" ), $args );
+
+	/**
+	 * Taxonomy: Participants.
+	 */
+
+	$labels = array(
+		"name" => __( 'Participants', 'gabfire' ),
+		"singular_name" => __( 'Participant', 'gabfire' ),
+	);
+
+	$args = array(
+		"label" => __( 'Participants', 'gabfire' ),
+		"labels" => $labels,
+		"public" => true,
+		"hierarchical" => true,
+		"label" => "Participants",
+		"show_ui" => true,
+		"show_in_menu" => true,
+		"show_in_nav_menus" => true,
+		"query_var" => true,
+		"rewrite" => array( 'slug' => 'participants', 'with_front' => true, ),
+		"show_admin_column" => false,
+		"show_in_rest" => false,
+		"rest_base" => "",
+		"show_in_quick_edit" => false,
+	);
+	register_taxonomy( "participants", array( "teardowns" ), $args );
+
+	/**
+	 * Taxonomy: Sources.
+	 */
+
+	$labels = array(
+		"name" => __( 'Sources', 'gabfire' ),
+		"singular_name" => __( 'Source', 'gabfire' ),
+	);
+
+	$args = array(
+		"label" => __( 'Sources', 'gabfire' ),
+		"labels" => $labels,
+		"public" => true,
+		"hierarchical" => false,
+		"label" => "Sources",
+		"show_ui" => true,
+		"show_in_menu" => true,
+		"show_in_nav_menus" => true,
+		"query_var" => true,
+		"rewrite" => array( 'slug' => 'source', 'with_front' => true, ),
+		"show_admin_column" => false,
+		"show_in_rest" => false,
+		"rest_base" => "",
+		"show_in_quick_edit" => false,
+	);
+	register_taxonomy( "source", array( "teardowns" ), $args );
+}
+
+add_action( 'init', 'cptui_register_my_taxes' );
+ 
+/**
  * Implement the Custom Header feature.
  */
 require get_template_directory() . '/inc/custom-header.php';
