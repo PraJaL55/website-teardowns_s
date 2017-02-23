@@ -397,10 +397,14 @@ hr {
 	-webkit-box-shadow: 0 0 24px rgba(0,0,0,.07);
 	-moz-box-shadow: 0 0 24px rgba(0,0,0,.07);
 	box-shadow: 0 0 24px rgba(0,0,0,.07);	
+	padding-bottom: 82.5%;
 }
 
 .project-wrapper .project-thumb {
 	overflow:hidden;
+	position: absolute;
+	height: 100%;
+
 }
 
 .project-wrapper .project-thumb > img {
@@ -408,6 +412,9 @@ hr {
 	transition:.4s;
 	-webkit-transition:.4s;
 	-moz-transition:.4s;
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
 }
 
 .project-wrapper:hover .project-thumb > img {

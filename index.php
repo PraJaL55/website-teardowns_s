@@ -82,217 +82,99 @@ get_header(); ?>
 				<h3 class="wow fadeInUp" data-wow-duration="0.5s" data-wow-delay=".1s">Check out some website teardowns</h3>
 				<p class="wow fadeInUp" data-wow-duration="0.5s" data-wow-delay=".3s"><a href="#">Submit your website for a teardown</a></p>
 			</div>
-			<div class="row">
+			
+			<?php 
+				$args = array(
+					'post_type' => 'teardowns',
+				/*	'tax_query' => array(
+						array(
+							'taxonomy' => 'participants',
+							'field'    => 'slug',
+							'terms'    => 'bob',
+						),
+					), */
+				);
+				$the_query = new WP_Query( $args );
+				
+				if ( $the_query->have_posts() ) {
+					
+					$count=0;
+					
+					// The Loop
+					while ( $the_query->have_posts() ) {
+						
+						// open a new class="row" div every 4 iterations
+						if ( $count % 4 == 0 ) { 
+							if ( $count != 0 ) {
+								echo '</div>';
+							}								
+							echo '<div class="row">';
+						}
+						$the_query->the_post();
+						?>
+
 				<div class="col-md-3 col-sm-6 wow fadeInUpBig" data-wow-duration="1s" data-wow-delay=".1s">
-					<a href="<?php echo get_template_directory_uri(); ?>/subpage.php">
+				
+					<a href="<?php echo get_template_directory_uri(); ?>/subpage.php"> <!-- Add teardown url here!!! -->
 						<div class="project-wrapper">
-							<div class="project-client"><img src="<?php echo get_template_directory_uri(); ?>/img/clients/medium/1.png" class="img-responsive" alt=""/></div>
+							<div class="project-client"><img src="<?php echo get_template_directory_uri(); ?>/img/clients/medium/1.png" class="img-responsive" alt=""/></div> <!-- Add client image here!!! -->
+							
+							
 							<div class="project-thumb">
+							<?php
+								if ( have_rows( 'wt-website-screenshots' ) ) : the_row(); 
+									if ( get_sub_field( 'wt-website-screenshot-url') ) { 
+							?>
+							<img src="<?php the_sub_field( 'wt-website-screenshot-url' ); ?>" class="img-responsive" alt=""/>							
+							<?php } else {  // no image found ?>
 								<img src="<?php echo get_template_directory_uri(); ?>/img/project/1.jpg" class="img-responsive" alt=""/>
+							<?php }  the_sub_field( 'wt-website-screenshot-caption' ); 
+							endif; 
+							?>
 							</div>
+							<!--<div class="project-thumb">
+								<img src="<?php echo get_template_directory_uri(); ?>/img/project/1.jpg" class="img-responsive" alt=""/> --><!-- Add client image here!!! -->
+							<!--</div>-->
 							<div class="overlay"></div>
-							<p>Google.com teardown</p>
+							<p><?php the_title();?></p>
+							
 							<div class="members">
-								<span><img src="<?php echo get_template_directory_uri(); ?>/img/members/1.png" class="img-responsive" alt=""/></span>
-								<span><img src="<?php echo get_template_directory_uri(); ?>/img/members/2.png" class="img-responsive" alt=""/></span>
-								<span><img src="<?php echo get_template_directory_uri(); ?>/img/members/3.png" class="img-responsive" alt=""/></span>
+								<?php
+									
+								//	$participants = get_categories( array('term_id' => get_the_ID(), 'taxonomy' => 'participants') );
+									$participants = wp_get_post_terms( get_the_ID(), 'participants');
+									
+								/*	if ( empty( $participants ) ) {
+										echo '<p><i>No participants yet.</i></p>';
+									}*/
+									
+									foreach ($participants as $scorer) {
+										//$p_name = get_field( 'wt-scorer-name', 'participants_' . $scorer->term_id ); // we need to sanitize fields!!!
+										$p_email = get_field( 'email', 'participants_' . $scorer->term_id );
+										
+										$p_img = get_avatar( $p_email);
+										
+										echo "<span>$p_img</span>";
+										
+									}
+								?>			
 							</div>
+							
+						
+							
+							
 						</div>
 					</a>
 				</div>
-				<div class="col-md-3 col-sm-6 wow fadeInUpBig" data-wow-duration="1s" data-wow-delay=".3s">
-					<a href="<?php echo get_template_directory_uri(); ?>/subpage.php">
-						<div class="project-wrapper">
-							<div class="project-client"><img src="<?php echo get_template_directory_uri(); ?>/img/clients/medium/2.png" class="img-responsive" alt=""/></div>
-							<div class="project-thumb">
-								<img src="<?php echo get_template_directory_uri(); ?>/img/project/2.jpg" class="img-responsive" alt=""/>
-							</div>
-							<div class="overlay"></div>
-							<p>Google.com teardown</p>
-							<div class="members">
-								<span><img src="<?php echo get_template_directory_uri(); ?>/img/members/1.png" class="img-responsive" alt=""/></span>
-								<span><img src="<?php echo get_template_directory_uri(); ?>/img/members/2.png" class="img-responsive" alt=""/></span>
-								<span><img src="<?php echo get_template_directory_uri(); ?>/img/members/3.png" class="img-responsive" alt=""/></span>
-							</div>
-						</div>
-					</a>
-				</div>
-				<div class="col-md-3 col-sm-6 wow fadeInUpBig" data-wow-duration="1s" data-wow-delay=".5s">
-					<a href="<?php echo get_template_directory_uri(); ?>/subpage.php">
-						<div class="project-wrapper">
-							<div class="project-client"><img src="<?php echo get_template_directory_uri(); ?>/img/clients/medium/3.png" class="img-responsive" alt=""/></div>
-							<div class="project-thumb">
-								<img src="<?php echo get_template_directory_uri(); ?>/img/project/3.jpg" class="img-responsive" alt=""/>
-							</div>
-							<div class="overlay"></div>
-							<div class="overlay overlay-video"></div>
-							<p>Google.com teardown</p>
-							<div class="members">
-								<span><img src="<?php echo get_template_directory_uri(); ?>/img/members/1.png" class="img-responsive" alt=""/></span>
-								<span><img src="<?php echo get_template_directory_uri(); ?>/img/members/2.png" class="img-responsive" alt=""/></span>
-								<span><img src="<?php echo get_template_directory_uri(); ?>/img/members/3.png" class="img-responsive" alt=""/></span>
-							</div>
-						</div>
-					</a>
-				</div>
-				<div class="col-md-3 col-sm-6 wow fadeInUpBig" data-wow-duration="1s" data-wow-delay=".7s">
-					<a href="<?php echo get_template_directory_uri(); ?>/subpage.php">
-						<div class="project-wrapper">
-							<div class="project-client"><img src="<?php echo get_template_directory_uri(); ?>/img/clients/medium/4.png" class="img-responsive" alt=""/></div>
-							<div class="project-thumb">
-								<img src="<?php echo get_template_directory_uri(); ?>/img/project/4.jpg" class="img-responsive" alt=""/>
-							</div>
-							<div class="overlay"></div>
-							<p>Google.com teardown</p>
-							<div class="members">
-								<span><img src="<?php echo get_template_directory_uri(); ?>/img/members/1.png" class="img-responsive" alt=""/></span>
-								<span><img src="<?php echo get_template_directory_uri(); ?>/img/members/2.png" class="img-responsive" alt=""/></span>
-								<span><img src="<?php echo get_template_directory_uri(); ?>/img/members/3.png" class="img-responsive" alt=""/></span>
-							</div>
-						</div>
-					</a>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-3 col-sm-6 wow fadeInUpBig" data-wow-duration="1s" data-wow-delay=".1s">
-					<a href="<?php echo get_template_directory_uri(); ?>/subpage.php">
-						<div class="project-wrapper">
-							<div class="project-client"><img src="<?php echo get_template_directory_uri(); ?>/img/clients/medium/5.png" class="img-responsive" alt=""/></div>
-							<div class="project-thumb">
-								<img src="<?php echo get_template_directory_uri(); ?>/img/project/5.jpg" class="img-responsive" alt=""/>
-							</div>
-							<div class="overlay"></div>
-							<p>Google.com teardown</p>
-							<div class="members">
-								<span><img src="<?php echo get_template_directory_uri(); ?>/img/members/1.png" class="img-responsive" alt=""/></span>
-								<span><img src="<?php echo get_template_directory_uri(); ?>/img/members/1.png" class="img-responsive" alt=""/></span>
-								<span><img src="<?php echo get_template_directory_uri(); ?>/img/members/1.png" class="img-responsive" alt=""/></span>
-							</div>
-						</div>
-					</a>
-				</div>
-				<div class="col-md-3 col-sm-6 wow fadeInUpBig" data-wow-duration="1s" data-wow-delay=".3s">
-					<a href="<?php echo get_template_directory_uri(); ?>/subpage.php">
-						<div class="project-wrapper">
-							<div class="project-client"><img src="<?php echo get_template_directory_uri(); ?>/img/clients/medium/6.png" class="img-responsive" alt=""/></div>
-							<div class="project-thumb">
-								<img src="<?php echo get_template_directory_uri(); ?>/img/project/6.jpg" class="img-responsive" alt=""/>
-							</div>
-							<div class="overlay"></div>
-							<p>Google.com teardown</p>
-							<div class="members">
-								<span><img src="<?php echo get_template_directory_uri(); ?>/img/members/1.png" class="img-responsive" alt=""/></span>
-								<span><img src="<?php echo get_template_directory_uri(); ?>/img/members/1.png" class="img-responsive" alt=""/></span>
-								<span><img src="<?php echo get_template_directory_uri(); ?>/img/members/1.png" class="img-responsive" alt=""/></span>
-							</div>
-						</div>
-					</a>
-				</div>
-				<div class="col-md-3 col-sm-6 wow fadeInUpBig" data-wow-duration="1s" data-wow-delay=".5s">
-					<a href="<?php echo get_template_directory_uri(); ?>/subpage.php">
-						<div class="project-wrapper">
-							<div class="project-client"><img src="<?php echo get_template_directory_uri(); ?>/img/clients/medium/7.png" class="img-responsive" alt=""/></div>
-							<div class="project-thumb">
-								<img src="<?php echo get_template_directory_uri(); ?>/img/project/7.jpg" class="img-responsive" alt=""/>
-							</div>
-							<div class="overlay"></div>
-							<p>Google.com teardown</p>
-							<div class="members">
-								<span><img src="<?php echo get_template_directory_uri(); ?>/img/members/1.png" class="img-responsive" alt=""/></span>
-								<span><img src="<?php echo get_template_directory_uri(); ?>/img/members/1.png" class="img-responsive" alt=""/></span>
-								<span><img src="<?php echo get_template_directory_uri(); ?>/img/members/1.png" class="img-responsive" alt=""/></span>
-							</div>
-						</div>
-					</a>
-				</div>
-				<div class="col-md-3 col-sm-6 wow fadeInUpBig" data-wow-duration="1s" data-wow-delay=".7s">
-					<a href="<?php echo get_template_directory_uri(); ?>/subpage.php">
-						<div class="project-wrapper">
-							<div class="project-client"><img src="<?php echo get_template_directory_uri(); ?>/img/clients/medium/8.png" class="img-responsive" alt=""/></div>
-							<div class="project-thumb">
-								<img src="<?php echo get_template_directory_uri(); ?>/img/project/8.jpg" class="img-responsive" alt=""/>
-							</div>
-							<div class="overlay"></div>
-							<p>Google.com teardown</p>
-							<div class="members">
-								<span><img src="<?php echo get_template_directory_uri(); ?>/img/members/1.png" class="img-responsive" alt=""/></span>
-								<span><img src="<?php echo get_template_directory_uri(); ?>/img/members/1.png" class="img-responsive" alt=""/></span>
-								<span><img src="<?php echo get_template_directory_uri(); ?>/img/members/1.png" class="img-responsive" alt=""/></span>
-							</div>
-						</div>
-					</a>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-3 col-sm-6 wow fadeInUpBig" data-wow-duration="1s" data-wow-delay=".1s">
-					<a href="<?php echo get_template_directory_uri(); ?>/subpage.php">
-						<div class="project-wrapper">
-							<div class="project-client"><img src="<?php echo get_template_directory_uri(); ?>/img/clients/medium/1.png" class="img-responsive" alt=""/></div>
-							<div class="project-thumb">
-								<img src="<?php echo get_template_directory_uri(); ?>/img/project/9.jpg" class="img-responsive" alt=""/>
-							</div>
-							<div class="overlay"></div>
-							<p>Google.com teardown</p>
-							<div class="members">
-								<span><img src="<?php echo get_template_directory_uri(); ?>/img/members/1.png" class="img-responsive" alt=""/></span>
-								<span><img src="<?php echo get_template_directory_uri(); ?>/img/members/2.png" class="img-responsive" alt=""/></span>
-								<span><img src="<?php echo get_template_directory_uri(); ?>/img/members/3.png" class="img-responsive" alt=""/></span>
-							</div>
-						</div>
-					</a>
-				</div>
-				<div class="col-md-3 col-sm-6 wow fadeInUpBig" data-wow-duration="1s" data-wow-delay=".3s">
-					<a href="<?php echo get_template_directory_uri(); ?>/subpage.php">
-						<div class="project-wrapper">
-							<div class="project-client"><img src="<?php echo get_template_directory_uri(); ?>/img/clients/medium/2.png" class="img-responsive" alt=""/></div>
-							<div class="project-thumb">
-								<img src="<?php echo get_template_directory_uri(); ?>/img/project/10.jpg" class="img-responsive" alt=""/>
-							</div>
-							<div class="overlay"></div>
-							<p>Google.com teardown</p>
-							<div class="members">
-								<span><img src="<?php echo get_template_directory_uri(); ?>/img/members/1.png" class="img-responsive" alt=""/></span>
-								<span><img src="<?php echo get_template_directory_uri(); ?>/img/members/2.png" class="img-responsive" alt=""/></span>
-								<span><img src="<?php echo get_template_directory_uri(); ?>/img/members/3.png" class="img-responsive" alt=""/></span>
-							</div>
-						</div>
-					</a>
-				</div>
-				<div class="col-md-3 col-sm-6 wow fadeInUpBig" data-wow-duration="1s" data-wow-delay=".5s">
-					<a href="<?php echo get_template_directory_uri(); ?>/subpage.php">
-						<div class="project-wrapper">
-							<div class="project-client"><img src="<?php echo get_template_directory_uri(); ?>/img/clients/medium/3.png" class="img-responsive" alt=""/></div>
-							<div class="project-thumb">
-								<img src="<?php echo get_template_directory_uri(); ?>/img/project/11.jpg" class="img-responsive" alt=""/>
-							</div>
-							<div class="overlay"></div>
-							<p>Google.com teardown</p>
-							<div class="members">
-								<span><img src="<?php echo get_template_directory_uri(); ?>/img/members/1.png" class="img-responsive" alt=""/></span>
-								<span><img src="<?php echo get_template_directory_uri(); ?>/img/members/2.png" class="img-responsive" alt=""/></span>
-								<span><img src="<?php echo get_template_directory_uri(); ?>/img/members/3.png" class="img-responsive" alt=""/></span>
-							</div>
-						</div>
-					</a>
-				</div>
-				<div class="col-md-3 col-sm-6 wow fadeInUpBig" data-wow-duration="1s" data-wow-delay=".7s">
-					<a href="<?php echo get_template_directory_uri(); ?>/subpage.php">
-						<div class="project-wrapper">
-							<div class="project-client"><img src="<?php echo get_template_directory_uri(); ?>/img/clients/medium/4.png" class="img-responsive" alt=""/></div>
-							<div class="project-thumb">
-								<img src="<?php echo get_template_directory_uri(); ?>/img/project/12.jpg" class="img-responsive" alt=""/>
-							</div>
-							<div class="overlay"></div>
-							<p>Google.com teardown</p>
-							<div class="members">
-								<span><img src="<?php echo get_template_directory_uri(); ?>/img/members/1.png" class="img-responsive" alt=""/></span>
-								<span><img src="<?php echo get_template_directory_uri(); ?>/img/members/2.png" class="img-responsive" alt=""/></span>
-								<span><img src="<?php echo get_template_directory_uri(); ?>/img/members/3.png" class="img-responsive" alt=""/></span>
-							</div>
-						</div>
-					</a>
-				</div>
-			</div>
+					<?php
+					$count++;
+					}
+					/* Restore original Post Data */
+					wp_reset_postdata();
+				} else {
+					// no posts found
+				}
+				?>
 		</div>
 	</div>
 	
