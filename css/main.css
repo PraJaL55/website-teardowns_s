@@ -561,7 +561,7 @@ p b {
     position: absolute;
     left: 0;
     top: 0;
-	z-index:33;
+	z-index:15;
 	max-width: 50%;
 }
 
