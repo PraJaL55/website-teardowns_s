@@ -86,13 +86,14 @@ get_header(); ?>
 			<?php 
 				$args = array(
 					'post_type' => 'teardowns',
-				/*	'tax_query' => array(
+					'tax_query' => array(
 						array(
-							'taxonomy' => 'participants',
+							'taxonomy' => 'teardown_tags',
 							'field'    => 'slug',
-							'terms'    => 'bob',
-						),
-					), */
+							'terms'    => array('featured', 'third-party'),
+							'operator' => 'NOT IN',
+						)
+					)
 				);
 				$the_query = new WP_Query( $args );
 				
@@ -115,7 +116,7 @@ get_header(); ?>
 
 				<div class="col-md-3 col-sm-6 wow fadeInUpBig" data-wow-duration="1s" data-wow-delay=".1s">
 				
-					<a href="<?php echo get_template_directory_uri(); ?>/subpage.php"> <!-- Add teardown url here!!! -->
+					<a href="<?php the_permalink(); ?>"> <!-- Add teardown url here!!! -->
 						<div class="project-wrapper">
 							<div class="project-client"><img src="<?php echo get_template_directory_uri(); ?>/img/clients/medium/1.png" class="img-responsive" alt=""/></div> <!-- Add client image here!!! -->
 							
@@ -128,7 +129,7 @@ get_header(); ?>
 							<img src="<?php the_sub_field( 'wt-website-screenshot-url' ); ?>" class="img-responsive" alt=""/>							
 							<?php } else {  // no image found ?>
 								<img src="<?php echo get_template_directory_uri(); ?>/img/project/1.jpg" class="img-responsive" alt=""/>
-							<?php }  the_sub_field( 'wt-website-screenshot-caption' ); 
+							<?php }//  the_sub_field( 'wt-website-screenshot-caption' ); 
 							endif; 
 							?>
 							</div>
@@ -186,45 +187,88 @@ get_header(); ?>
 	
 	<div class="featured">
 		<div class="container">
-			<div class="row">
+		
+		<?php 
+				$args = array(
+					'post_type' => 'teardowns',
+					'tax_query' => array(
+						array(
+							'taxonomy' => 'teardown_tags',
+							'field'    => 'slug',
+							'terms'    => 'featured'
+						)
+					)
+				);
+				$the_query = new WP_Query( $args );
+				
+				if ( $the_query->have_posts() ) {
+					
+					$count=0;
+					
+					// The Loop
+					while ( $the_query->have_posts() ) {
+						
+						// open a new class="row" div every 2 iterations
+						if ( $count % 2 == 0 ) { 
+							if ( $count != 0 ) {
+								echo '</div>';
+							}								
+							echo '<div class="row">';
+						}
+						$the_query->the_post();
+						?>
 				<div class="col-sm-6 wow fadeInUpBig" data-wow-duration="1s" data-wow-delay=".1s">
-					<a href="<?php echo get_template_directory_uri(); ?>/subpage.php">
+					<a href="<?php the_permalink(); ?>">
 						<div class="featured-project">
 							<div class="members">
-								<span><img src="<?php echo get_template_directory_uri(); ?>/img/members/1.png" class="img-responsive" alt=""/></span>
-								<span><img src="<?php echo get_template_directory_uri(); ?>/img/members/2.png" class="img-responsive" alt=""/></span>
-								<span><img src="<?php echo get_template_directory_uri(); ?>/img/members/3.png" class="img-responsive" alt=""/></span>
+								<?php
+									
+								//	$participants = get_categories( array('term_id' => get_the_ID(), 'taxonomy' => 'participants') );
+									$participants = wp_get_post_terms( get_the_ID(), 'participants');
+									
+								/*	if ( empty( $participants ) ) {
+										echo '<p><i>No participants yet.</i></p>';
+									}*/
+									
+									foreach ($participants as $scorer) {
+										//$p_name = get_field( 'wt-scorer-name', 'participants_' . $scorer->term_id ); // we need to sanitize fields!!!
+										$p_email = get_field( 'email', 'participants_' . $scorer->term_id );
+										
+										$p_img = get_avatar( $p_email);
+										
+										echo "<span>$p_img</span>";
+										
+									}
+								?>		
 							</div>
 							<div class="fp-client">
-								<img src="<?php echo get_template_directory_uri(); ?>/img/clients/big/1.png" class="img-responsive" alt=""/>
-								Paypal.com teardown
+								<img src="<?php echo get_template_directory_uri(); ?>/img/clients/big/1.png" class="img-responsive" alt=""/> <!-- Add client image here!!! -->
+								<p><?php the_title();?></p>
 							</div>
 							<div class="fp-thumb">
+							<?php
+								if ( have_rows( 'wt-website-screenshots' ) ) : the_row(); 
+									if ( get_sub_field( 'wt-website-screenshot-url') ) { 
+							?>
+							<img src="<?php the_sub_field( 'wt-website-screenshot-url' ); ?>" class="img-responsive" alt=""/>							
+							<?php } else {  // no image found ?>
 								<img src="<?php echo get_template_directory_uri(); ?>/img/project/01/1.jpg" class="img-responsive" alt=""/>
+							<?php }  // the_sub_field( 'wt-website-screenshot-caption' ); 
+							endif; 
+							?>
 							</div>
 						</div>
 					</a>
 				</div>
-				<div class="col-sm-6 wow fadeInUpBig" data-wow-duration="1s" data-wow-delay=".3s">
-					<a href="<?php echo get_template_directory_uri(); ?>/subpage.php">
-						<div class="featured-project">
-							<div class="members">
-								<span><img src="<?php echo get_template_directory_uri(); ?>/img/members/1.png" class="img-responsive" alt=""/></span>
-								<span><img src="<?php echo get_template_directory_uri(); ?>/img/members/2.png" class="img-responsive" alt=""/></span>
-								<span><img src="<?php echo get_template_directory_uri(); ?>/img/members/3.png" class="img-responsive" alt=""/></span>
-							</div>
-							<div class="fp-client">
-								<img src="<?php echo get_template_directory_uri(); ?>/img/clients/big/2.png" class="img-responsive" alt=""/>
-								Studio.envato.com teardown
-							</div>
-							<div class="fp-thumb">
-								<div class="overlay overlay-video"></div>
-								<img src="<?php echo get_template_directory_uri(); ?>/img/project/01/2.jpg" class="img-responsive" alt=""/>
-							</div>
-						</div>
-					</a>
-				</div>
-			</div>
+				<?php
+					$count++;
+					}
+					/* Restore original Post Data */
+					wp_reset_postdata();
+				} else {
+					// no posts found
+				}
+				?>
 		</div>
 	</div>
 	
@@ -236,57 +280,88 @@ get_header(); ?>
 	
 	<div class="featured tp-featured">
 		<div class="container">
-			<div class="row">
+			<?php 
+				$args = array(
+					'post_type' => 'teardowns',
+					'tax_query' => array(
+						array(
+							'taxonomy' => 'teardown_tags',
+							'field'    => 'slug',
+							'terms'    => 'third-party'
+						)
+					)
+				);
+				$the_query = new WP_Query( $args );
+				
+				if ( $the_query->have_posts() ) {
+					
+					$count=0;
+					
+					// The Loop
+					while ( $the_query->have_posts() ) {
+						
+						// open a new class="row" div every 3 iterations
+						if ( $count % 3 == 0 ) { 
+							if ( $count != 0 ) {
+								echo '</div>';
+							}								
+							echo '<div class="row">';
+						}
+						$the_query->the_post();
+						?>
 				<div class="col-sm-4 wow fadeInUpBig" data-wow-duration="1s" data-wow-delay=".1s">
-					<a href="<?php echo get_template_directory_uri(); ?>/subpage.php">
+					<a href="<?php the_permalink(); ?>">
 						<div class="featured-project tp-project">
 							<div class="members">
-								<span><img src="<?php echo get_template_directory_uri(); ?>/img/members/2.png" class="img-responsive" alt=""/></span>
+								<?php
+									
+								//	$participants = get_categories( array('term_id' => get_the_ID(), 'taxonomy' => 'participants') );
+									$participants = wp_get_post_terms( get_the_ID(), 'participants');
+									
+								/*	if ( empty( $participants ) ) {
+										echo '<p><i>No participants yet.</i></p>';
+									}*/
+									
+									foreach ($participants as $scorer) {
+										//$p_name = get_field( 'wt-scorer-name', 'participants_' . $scorer->term_id ); // we need to sanitize fields!!!
+										$p_email = get_field( 'email', 'participants_' . $scorer->term_id );
+										
+										$p_img = get_avatar( $p_email);
+										
+										echo "<span>$p_img</span>";
+										
+									}
+								?>								
 							</div>
 							<div class="fp-client">
-								<img src="<?php echo get_template_directory_uri(); ?>/img/clients/big/1.png" class="img-responsive" alt=""/>
-								Paypal.com teardown
+								<img src="<?php echo get_template_directory_uri(); ?>/img/clients/big/1.png" class="img-responsive" alt=""/><!-- Add client image here!!! -->
+								<p><?php the_title();?></p>
 							</div>
 							<div class="fp-thumb">
-								<div class="overlay overlay-video"></div>
+								<!--<div class="overlay overlay-video"></div>-->
+								<?php
+								if ( have_rows( 'wt-website-screenshots' ) ) : the_row(); 
+									if ( get_sub_field( 'wt-website-screenshot-url') ) { 
+							?>
+							<img src="<?php the_sub_field( 'wt-website-screenshot-url' ); ?>" class="img-responsive" alt=""/>							
+							<?php } else {  // no image found ?>
 								<img src="<?php echo get_template_directory_uri(); ?>/img/project/02/1.jpg" class="img-responsive" alt=""/>
+							<?php }  // the_sub_field( 'wt-website-screenshot-caption' ); 
+							endif; 
+							?>
 							</div>
 						</div>
 					</a>
 				</div>
-				<div class="col-sm-4 wow fadeInUpBig" data-wow-duration="1s" data-wow-delay=".3s">
-					<a href="<?php echo get_template_directory_uri(); ?>/subpage.php">
-						<div class="featured-project tp-project">
-							<div class="members">
-								<span><img src="<?php echo get_template_directory_uri(); ?>/img/members/2.png" class="img-responsive" alt=""/></span>
-							</div>
-							<div class="fp-client">
-								<img src="<?php echo get_template_directory_uri(); ?>/img/clients/big/1.png" class="img-responsive" alt=""/>
-								Paypal.com teardown
-							</div>
-							<div class="fp-thumb">
-								<img src="<?php echo get_template_directory_uri(); ?>/img/project/02/2.jpg" class="img-responsive" alt=""/>
-							</div>
-						</div>
-					</a>
-				</div>
-				<div class="col-sm-4 wow fadeInUpBig" data-wow-duration="1s" data-wow-delay=".5s">
-					<a href="<?php echo get_template_directory_uri(); ?>/subpage.php">
-						<div class="featured-project tp-project">
-							<div class="members">
-								<span><img src="<?php echo get_template_directory_uri(); ?>/img/members/2.png" class="img-responsive" alt=""/></span>
-							</div>
-							<div class="fp-client">
-								<img src="<?php echo get_template_directory_uri(); ?>/img/clients/big/1.png" class="img-responsive" alt=""/>
-								Paypal.com teardown
-							</div>
-							<div class="fp-thumb">
-								<img src="<?php echo get_template_directory_uri(); ?>/img/project/02/3.jpg" class="img-responsive" alt=""/>
-							</div>
-						</div>
-					</a>
-				</div>
-			</div>
+				<?php
+					$count++;
+					}
+					/* Restore original Post Data */
+					wp_reset_postdata();
+				} else {
+					// no posts found
+				}
+				?>
 		</div>
 	</div>
 	
@@ -387,7 +462,7 @@ get_header(); ?>
 	
 	<div class="partners text-center">
 		<div class="container">
-			<h5 class="wow fadeInUp" data-wow-duration="1s" data-wow-delay=".1s">We are also truested by some more websites</h5>
+			<h5 class="wow fadeInUp" data-wow-duration="1s" data-wow-delay=".1s">We are also trusted by some more websites</h5>
 			<ul class="wow fadeInUp" data-wow-duration="1s" data-wow-delay=".3s">
 				<li><img src="<?php echo get_template_directory_uri(); ?>/img/partners/1.png" class="img-responsive" alt=""/></li>
 				<li><img src="<?php echo get_template_directory_uri(); ?>/img/partners/2.png" class="img-responsive" alt=""/></li>

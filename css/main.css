@@ -533,8 +533,8 @@ p b {
 
 .fp-thumb {
     width: calc(100% - 10px);
-    height: calc (100% - 10px);
-    position: relative;
+    height: calc(100% - 10px);
+    position: absolute;
     top: 10px;
     left: 10px;
 }
@@ -543,6 +543,9 @@ p b {
 	-webkit-box-shadow: 0 0 24px rgba(0,0,0,.07);
 	-moz-box-shadow: 0 0 24px rgba(0,0,0,.07);
 	box-shadow: 0 0 24px rgba(0,0,0,.07);
+	width:100%;
+	height:100%;
+	object-fit:cover;
 }
 
 .fp-client {
@@ -559,6 +562,7 @@ p b {
     left: 0;
     top: 0;
 	z-index:33;
+	max-width: 50%;
 }
 
 
@@ -569,7 +573,7 @@ p b {
 .featured-project {
 	position:relative;
 	margin-bottom:60px;
-
+	padding-bottom:67.5%
 }
 
 .featured-project .members {
@@ -626,9 +630,9 @@ p b {
     max-height: 21px;
 }
 
-.featured.tp-featured {
+/*.featured.tp-featured {
     padding-bottom: 78px;
-}
+}*/
 
 .our-features {
 	padding: 121px 0 127px;
