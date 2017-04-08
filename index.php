@@ -123,15 +123,13 @@ get_header(); ?>
 							
 							<div class="project-thumb">
 							<?php
-								if ( have_rows( 'wt-website-screenshots' ) ) : the_row(); 
-									if ( get_sub_field( 'wt-website-screenshot-url') ) { 
-							?>
-							<img src="<?php the_sub_field( 'wt-website-screenshot-url' ); ?>" class="img-responsive" alt=""/>							
+								$featuredImage = get_the_post_thumbnail();
+								if (!empty($featuredImage) ) {
+									echo $featuredImage;
+								?>
 							<?php } else {  // no image found ?>
 								<img src="<?php echo get_template_directory_uri(); ?>/img/project/1.jpg" class="img-responsive" alt=""/>
-							<?php }//  the_sub_field( 'wt-website-screenshot-caption' ); 
-							endif; 
-							?>
+							<?php } ?>
 							</div>
 							<!--<div class="project-thumb">
 								<img src="<?php echo get_template_directory_uri(); ?>/img/project/1.jpg" class="img-responsive" alt=""/> --><!-- Add client image here!!! -->
@@ -246,16 +244,14 @@ get_header(); ?>
 								<p><?php the_title();?></p>
 							</div>
 							<div class="fp-thumb">
-							<?php
-								if ( have_rows( 'wt-website-screenshots' ) ) : the_row(); 
-									if ( get_sub_field( 'wt-website-screenshot-url') ) { 
-							?>
-							<img src="<?php the_sub_field( 'wt-website-screenshot-url' ); ?>" class="img-responsive" alt=""/>							
+								<?php
+								$featuredImage = get_the_post_thumbnail();
+								if (!empty($featuredImage) ) {
+									echo $featuredImage;
+								?>
 							<?php } else {  // no image found ?>
 								<img src="<?php echo get_template_directory_uri(); ?>/img/project/01/1.jpg" class="img-responsive" alt=""/>
-							<?php }  // the_sub_field( 'wt-website-screenshot-caption' ); 
-							endif; 
-							?>
+							<?php } ?>
 							</div>
 						</div>
 					</a>
@@ -340,15 +336,13 @@ get_header(); ?>
 							<div class="fp-thumb">
 								<!--<div class="overlay overlay-video"></div>-->
 								<?php
-								if ( have_rows( 'wt-website-screenshots' ) ) : the_row(); 
-									if ( get_sub_field( 'wt-website-screenshot-url') ) { 
-							?>
-							<img src="<?php the_sub_field( 'wt-website-screenshot-url' ); ?>" class="img-responsive" alt=""/>							
+								$featuredImage = get_the_post_thumbnail();
+								if (!empty($featuredImage) ) {
+									echo $featuredImage;
+								?>
 							<?php } else {  // no image found ?>
 								<img src="<?php echo get_template_directory_uri(); ?>/img/project/02/1.jpg" class="img-responsive" alt=""/>
-							<?php }  // the_sub_field( 'wt-website-screenshot-caption' ); 
-							endif; 
-							?>
+							<?php } ?>
 							</div>
 						</div>
 					</a>

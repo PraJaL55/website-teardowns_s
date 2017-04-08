@@ -9,7 +9,8 @@
  * @package Website-teardown
  */
 
-?><!DOCTYPE html>
+?>
+<!DOCTYPE html>
 <!--[if IE 7 ]>
 <html lang="en" class="ie7"> <![endif]-->
 <!--[if IE 8 ]>
@@ -38,7 +39,7 @@
 	<link rel="apple-touch-icon" href="<?php echo get_template_directory_uri(); ?>/img/apple-touch-icon.png">
 
 	<!-- ICONS CSS -->
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">-->
 
 	<!-- THEME STYLES CSS -->
 	<!--<link rel="stylesheet" href="/wp-content/themes/website-teardowns/css/bootstrap.min.css">

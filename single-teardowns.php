@@ -1,34 +1,63 @@
 <!-- The single teadowns page -->
-<?php get_header(); ?>
+<?php get_header('2'); ?>
 
 	<div class="project-single" id="1">
 		<div class="container">
 			<div class="row wow fadeInUp" data-wow-duration="1s" data-wow-delay=".1s">
 				<div class="col-sm-8">
-					<h2>Teardown of Google.com</h2>
-					<span class="meta">on 12 December, 2017</span>
+					<h2>Teradown of <?php the_title();?></h2>
+					<span class="meta">on <?php echo get_the_date(); ?></span>
 				</div>
 				<div class="col-sm-4">
 					<div class="comment-meta">
-						15 Comments
+						  <?php comments_number( '0 comment', '1 comment', '% comments' ); ?>
 					</div>
 				</div>
 			</div>
+			<?php	//Form the post-author name and post-content
+					global $post;
+					$author_id=$post->post_author;
+					$content = $post->post_content;
+					$formattedContent = apply_filters('the_content', $content);
+					
+					$website_url = get_field( 'wt-website-url' );
+					$source_url = parse_url($website_url);
+					$source_url_host = $source_url['host'];
+					
+					$fname = get_the_author_meta('first_name', $author_id);
+					$lname = get_the_author_meta('last_name', $author_id);
+					$dname = get_the_author_meta('display_name', $author_id);
+					$full_name = '';
+
+					if(empty($fname) && empty($lname)){
+						$full_name = $dname;
+					} elseif( empty($fname)){
+						$full_name = $lname;
+					} elseif( empty( $lname )){
+						$full_name = $fname;
+					} else {
+						//both first name and last name are present
+						$full_name = "{$fname} {$lname}";
+					}
+			?>
 			<div class="project-single-frame wow fadeInUpBig" data-wow-duration="1s" data-wow-delay=".3s">
 				<div class="meta-author">
-					<img src="<?php echo get_template_directory_uri(); ?>/img/single/author.png" alt=""/> Post written by <a href="#">Alex Bender</a>
+					<?php echo get_avatar( $author_id, 64);  ?> Post written by <a href="#"><?php echo $full_name; ?></a>
 				</div>
 				<div class="frame-image active">
-					<img src="<?php echo get_template_directory_uri(); ?>/img/single/1.jpg" class="img-responsive" alt=""/>
+					<?php  $post_thumbnail_id = get_post_thumbnail_id();
+						$post_thumbnail_url = wp_get_attachment_url( $post_thumbnail_id ); ?>
+					<img src="<?php echo $post_thumbnail_url; ?>" class="img-responsive featured-img" alt=""/>  <!--Get featured image-->
+				<!--<img src="<?php echo get_template_directory_uri(); ?>/img/single/1.jpg" class="img-responsive" alt=""/>-->
 				</div>
 				<div class="frame-video">
 					<div class="embed-responsive embed-responsive-16by9">
-						<iframe class="embed-responsive-item" src="https://www.youtube.com/embed/XGSy3_Czz8k"></iframe>
+					<iframe class="embed-responsive-item" src="<?php the_field( 'wt-website-video' ); ?>"></iframe>
 					</div>
 				</div>
 				<div class="frame-slideshare">
 					<div class="embed-responsive embed-responsive-16by9">
-						<iframe src="https://www.slidesharessss.net/slideshow/embed_code/key/ayHnvYxBx0L9FY" width="597" height="486" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" allowfullscreen> </iframe>
+					<!--<iframe src="https://www.slidesharessss.net/slideshow/embed_code/key/ayHnvYxBx0L9FY" width="597" height="486" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" allowfullscreen> </iframe> -->
 					</div>
 				</div>
 				<ul class="psf-nav">
@@ -48,56 +77,28 @@
 				<div class="col-sm-6">
 					<h3>Teardown screenshots</h3>
 				</div>
-				<div class="col-sm-6 desk-text-right">
-					<p>Screenshots were taken on 10 December, 2017</p>
-				</div>
 			</div>
 			<div class="row wow fadeInUp" data-wow-duration="1s" data-wow-delay=".3s">
-				<div class="col-md-2">
-					<a href="<?php echo get_template_directory_uri(); ?>/img/shots/1.jpg" data-lity>
-						<div class="shot-thumb">
-							<img src="<?php echo get_template_directory_uri(); ?>/img/shots/1.jpg" class="img-responsive" alt=""/>
-							<div class="zoom"></div>
-						</div>
-						<h4>Homepage</h4>
-					</a>
-				</div>
-				<div class="col-md-2">
-					<a href="<?php echo get_template_directory_uri(); ?>/img/shots/1.jpg" data-lity>
-						<div class="shot-thumb">
-							<img src="<?php echo get_template_directory_uri(); ?>/img/shots/1.jpg" class="img-responsive" alt=""/>
-							<div class="zoom"></div>
-						</div>
-						<h4>About page</h4>
-					</a>
-				</div>
-				<div class="col-md-2">
-					<a href="<?php echo get_template_directory_uri(); ?>/img/shots/1.jpg" data-lity>
-						<div class="shot-thumb">
-							<img src="<?php echo get_template_directory_uri(); ?>/img/shots/1.jpg" class="img-responsive" alt=""/>
-							<div class="zoom"></div>
-						</div>
-						<h4>Contact page</h4>
-					</a>
-				</div>
-				<div class="col-md-2">
-					<a href="<?php echo get_template_directory_uri(); ?>/img/shots/1.jpg" data-lity>
-						<div class="shot-thumb">
-							<img src="<?php echo get_template_directory_uri(); ?>/img/shots/1.jpg" class="img-responsive" alt=""/>
-							<div class="zoom"></div>
-						</div>
-						<h4>User dashboard</h4>
-					</a>
-				</div>
-				<div class="col-md-2">
-					<a href="<?php echo get_template_directory_uri(); ?>/img/shots/1.jpg" data-lity>
-						<div class="shot-thumb">
-							<img src="<?php echo get_template_directory_uri(); ?>/img/shots/1.jpg" class="img-responsive" alt=""/>
-							<div class="zoom"></div>
-						</div>
-						<h4>Listing page</h4>
-					</a>
-				</div>
+				
+				<?php if ( have_rows( 'wt-website-screenshots' ) ) : ?>
+					<?php while ( have_rows( 'wt-website-screenshots' ) ) : the_row(); ?>
+						<?php if ( get_sub_field( 'wt-website-screenshot-url') ) { ?>
+							<div class="col-md-2 screenshots">
+								<a href="<?php the_sub_field( 'wt-website-screenshot-url' ); ?>" data-lity>
+									<div class="shot-thumb">
+										<img src="<?php the_sub_field( 'wt-website-screenshot-url' ); ?>" class="img-responsive" alt=""/>
+										<div class="zoom"></div>
+									</div>
+									<h4><?php the_sub_field( 'wt-website-screenshot-caption' ); ?></h4>
+								</a>
+							</div>
+						<?php } else { ?>
+									<p style="padding-left:17px">No screenshots found</p>
+						<? } ?>
+					<?php endwhile; ?>
+				<?php else : ?>
+					<?php // no rows found ?>
+				<?php endif; ?>
 			</div>
 		</div>
 	</div>
@@ -109,47 +110,60 @@
 			<div class="row">
 				<div class="col-md-7 wow fadeInLeft" data-wow-duration="1s" data-wow-delay=".1s">
 					<h3>Teardown <b>Data</b></h3>
-					<em>Teardown of Google website<br>Teradown is prepeared for <b>Alex Bender</b></em>
-					<p><b>Section 1.10.32 of "de Finibus Bonorum et Malorum", written</b></p>
-					<p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam</p>
-					<p><b>1914 translation by H. Rackham</b></p>
-					<p>Qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam</p>
-					<p><b>What should be done to improve conversions?</b></p>
-					<p>Nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat</p>
-					<p><b>What should be done to improve conversions?</b></p>
-					<p>On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain.</p>
-					<p><b>What should be done to improve conversions?</b></p>
-					<p>These cases are perfectly simple and easy to distinguish. In a free hour, when our power of choice is untrammelled and when nothing prevents our being able to do what we like best</p>
-					<p><b>Conclusions</b></p>
-					<p>Quently occur that pleasures have to be repudiated and annoyances accepted. The wise man therefore always holds in these matters to this principle of selection: he rejects pleasures</p>
+					<em><?php the_title();?><br>Teradown is prepeared by <b><?php echo $full_name; ?></b></em>
+					<p><b><?php echo $formattedContent; ?></b></p> <!--Post content -->
 				</div>
 				<div class="col-md-5 wow fadeInRight" data-wow-duration="1s" data-wow-delay=".1s">
 					<div class="site-info">
 						<ul>
 							<li>
-								<img src="<?php echo get_template_directory_uri(); ?>/img/single/1.png" alt=""/>
+								<img src="<?php echo get_template_directory_uri(); ?>/img/single/1.png" alt=""/><!--Add client image here! -->
 							</li>
 							<li>
-								<span><img src="<?php echo get_template_directory_uri(); ?>/img/single/ico4.png" alt=""/> Google.com</span>
+								<span><img src="<?php echo get_template_directory_uri(); ?>/img/single/ico4.png" alt=""/><a href="<?php echo $website_url; ?>"target="_blank"> <?php echo $source_url_host; ?></a></span>
 							</li>
 							<li>
 								<span><img src="<?php echo get_template_directory_uri(); ?>/img/single/ico5.png" alt=""/> Video</span>
-								<a href="https://www.youtube.com/watch?v=JVUtFZ7eS28" data-lity>
-									<div class="si-video">
-										<img src="<?php echo get_template_directory_uri(); ?>/img/single/2.jpg" class="img-responsive" alt=""/>
-									</div>
+								<a href="<?php 
+											if(!empty(get_field('wt-website-video'))){
+												the_field( 'wt-website-video' );
+												$flag=1;
+											} else {
+												echo '#';
+												$flag=0;
+											}
+											 ?>" data-lity>
+									<?php if($flag==1) {?>
+										<div class="si-video">
+											<img src="<?php echo get_template_directory_uri(); ?>/img/single/2.jpg" class="img-responsive" alt=""/>
+										</div>
+									<?php } else { ?>
+										<p>No video provided.</p>
+								<?php	} ?>
 								</a>
 							</li>
 							<li>
 								<span><img src="<?php echo get_template_directory_uri(); ?>/img/single/ico6.png" alt=""/> Target Audience</span>
-								<p>It is a long established fact that asreader will be distracted by the</p>
+								<?php if(!empty(get_field('wt-website-target-market'))){ ?>
+										<p><?php the_field( 'wt-website-target-market' ); ?></p>
+								<?php 	} else { ?>
+											<p>No target audience provided.</p>
+								<?php	} ?>
 							</li>
 							<li>
 								<span><img src="<?php echo get_template_directory_uri(); ?>/img/single/ico7.png" alt=""/> Goals</span>
 								<div class="list">
-									<p>It is a <b>long</b> established fact hat it is</p>
-									<p>Fact that a reader will be pretty dop</p>
-									<p>Distracted by the consectetur</p>
+								<?php if ( have_rows( 'wt-website-goals' ) ) : ?>
+									<?php while ( have_rows( 'wt-website-goals' ) ) : the_row(); ?>
+										<?php if(get_sub_field('wt-website-goal')){ ?>
+											<p><?php the_sub_field( 'wt-website-goal' ); ?></p>
+										<?php } else { ?>
+											<p>No goals provided.</p>
+										<?php	} ?>
+									<?php endwhile; ?>
+								<?php else : ?>
+									<?php // no rows found ?>
+								<?php endif; ?>
 								</div>
 							</li>
 							<li>
@@ -158,8 +172,12 @@
 							</li>
 							<li>
 								<span><img src="<?php echo get_template_directory_uri(); ?>/img/single/ico9.png" alt=""/> Employees</span>
-								<p>275 employees (2016)</p>
-							</li>
+								<?php if(!empty(get_field('wt-siteowner-numofemployees'))){ ?>
+										<p><?php the_field( 'wt-siteowner-numofemployees' ); ?></p>
+								<?php 	} else { ?>
+											<p>No number provided.</p>
+								<?php	} ?>
+								</li>
 						</ul>
 					</div>
 				</div>
@@ -167,25 +185,70 @@
 		</div>
 	</div>
 	
+	<?php // Website Scores 
+		
+		$scoreFirstImpression =  get_field( 'wt-score-first-impression' );
+		$scoreContent =  get_field( 'wt-score-content' );
+		$scoreConversion =  get_field( 'wt-score-conversion' );
+		$scoreDesign =  get_field( 'wt-score-design-ux' );
+		$scoreSeo =  get_field( 'wt-score-seo' );
+		$scoreIndustryInsights =  get_field( 'wt-score-industry' );
+		
+		$totalScore = $scoreFirstImpression + $scoreContent + $scoreConversion + $scoreDesign + $scoreSeo + $scoreIndustryInsights;
+		$percentScore = round($totalScore*5/3,0);
+		
+		// Score Ratings
+		$scoreRating = array(
+			
+			 1	=>	"ULTRA BAD",
+			 2	=>	"ULTRA BAD",
+			 3	=>	"BAD",
+			 4	=>	"BAD",
+			 5	=>	"AVERAGE",
+			 6	=>	"AVERAGE",
+			 7	=>	"GOOD",
+			 8	=>	"GOOD",
+			 9	=>	"SUPER",
+			 10	=>	"SUPER"
+			 
+		);
+		
+		//Score Colors
+		$scoreColor = array(
+			
+			 1	=>	"highlight-red",
+			 2	=>	"highlight-red",
+			 3	=>	"highlight-orange",
+			 4	=>	"highlight-orange",
+			 5	=>	"highlight-yellow",
+			 6	=>	"highlight-yellow",
+			 7	=>	"highlight-green",
+			 8	=>	"highlight-green",
+			 9	=>	"highlight-green2",
+			 10	=>	"highlight-green2"
+			 
+		);
+	?>
+	
 	<div class="score" id="4">
 		<div class="container">
 			<div class="text-center wow fadeInUp" data-wow-duration="1s" data-wow-delay=".1s">
 				<h3>Website <b>score</b> areas</h3>
-				<h5>Your site scored <b>60%</b> on our review</h5>
+				<h5>Your site scored <b><?php echo $percentScore; ?>%</b> on our review</h5>
 				<div class="progress">
-					<span class="progress-percentage load" style="left:54%;"></span>
+					<span class="progress-percentage load" style="left: <?php echo $percentScore; ?>%;"></span>
 					<div class="progress-bar bg-color1" role="progressbar" style="width:20%"></div>
 					<div class="progress-bar bg-color2" role="progressbar" style="width:20%"></div>
 					<div class="progress-bar bg-color3" role="progressbar" style="width:20%"></div>
 					<div class="progress-bar bg-color4" role="progressbar" style="width:20%"></div>
 					<div class="progress-bar bg-color5" role="progressbar" style="width:20%"></div>
 				</div>
-				<p>We analyzed your site across these 10 criterias:</p>
+				<p>We analyzed your site across these 6 criterias:</p>
 			</div>
 			<ul>
 				<li class="wow fadeInUp" data-wow-duration="1s" data-wow-delay=".1s">
 					<div class="score-info score-good score-item1">
-						<h4>First Impressions - <span class="highlight-green2">GOOD</span></h4>
+						<h4>First Impressions - <span class="<?php echo $scoreColor[$scoreFirstImpression]; ?>"> <?php echo $scoreRating[$scoreFirstImpression]; ?></span></h4>
 						<p>The immediate first reaction from a user</p>
 					</div>
 					<div class="score-body score-item1-info hide-desktop">
@@ -195,7 +258,7 @@
 				</li>
 				<li class="wow fadeInUp" data-wow-duration="1s" data-wow-delay=".3s">
 					<div class="score-info score-average score-item2">
-						<h4>Website content - <span class="highlight-yellow">AVERAGE</span></h4>
+						<h4>Website content - <span class="<?php echo $scoreColor[$scoreContent]; ?>"> <?php echo $scoreRating[$scoreContent]; ?></span></h4>
 						<p>The immediate first reaction from a user</p>
 					</div>
 				</li>
@@ -211,7 +274,7 @@
 			<ul>
 				<li class="wow fadeInUp" data-wow-duration="1s" data-wow-delay=".1s">
 					<div class="score-info score-super score-item3">
-						<h4>Website conversion - <span class="highlight-green2">SUPER</span></h4>
+						<h4>Website conversion - <span class="<?php echo $scoreColor[$scoreConversion]; ?>"><?php echo $scoreRating[$scoreConversion]; ?></span></h4>
 						<p>The immediate first reaction from a user</p>
 					</div>
 					<div class="score-body score-item3-info hide-desktop">
@@ -221,7 +284,7 @@
 				</li>
 				<li class="wow fadeInUp" data-wow-duration="1s" data-wow-delay=".3s">
 					<div class="score-info score-bad score-item4">
-						<h4>Website design - <span class="highlight-orange">BAD</span></h4>
+						<h4>Website design - <span class="<?php echo $scoreColor[$scoreDesign]; ?>"><?php echo $scoreRating[$scoreDesign]; ?></</span></h4>
 						<p>The immediate first reaction from a user</p>
 					</div>
 				</li>
@@ -235,7 +298,7 @@
 				<p>No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful.</p>
 			</div>
 			<ul>
-				<li class="wow fadeInUp" data-wow-duration="1s" data-wow-delay=".1s">
+			<!--	<li class="wow fadeInUp" data-wow-duration="1s" data-wow-delay=".1s">
 					<div class="score-info score-ultrabad score-item5">
 						<h4>Website UX - <span class="highlight-red">ULTRA BAD</span></h4>
 						<p>The immediate first reaction from a user</p>
@@ -244,10 +307,10 @@
 						<p>But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness.</p>
 						<p>No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful.</p>
 					</div>
-				</li>
+				</li> -->
 				<li class="wow fadeInUp" data-wow-duration="1s" data-wow-delay=".3s">
 					<div class="score-info score-bad score-item6">
-						<h4>Website SEO - <span class="highlight-orange">BAD</span></h4>
+						<h4>Website SEO - <span class="<?php echo $scoreColor[$scoreSeo]; ?>"><?php echo $scoreRating[$scoreSeo]; ?></span></h4>
 						<p>The immediate first reaction from a user</p>
 					</div>
 				</li>
@@ -263,7 +326,7 @@
 			<ul>
 				<li class="wow fadeInUp" data-wow-duration="1s" data-wow-delay=".1s">
 					<div class="score-info score-good score-item7">
-						<h4>Industry insights - <span class="highlight-green">GOOD</span></h4>
+						<h4>Industry insights - <span class="<?php echo $scoreColor[$scoreIndustryInsights]; ?>"><?php echo $scoreRating[$scoreIndustryInsights]; ?></span></h4>
 						<p>The immediate first reaction from a user</p>
 					</div>
 					<div class="score-body score-item7-info hide-desktop">
@@ -271,14 +334,14 @@
 						<p>No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful.</p>
 					</div>
 				</li>
-				<li class="wow fadeInUp" data-wow-duration="1s" data-wow-delay=".3s">
+		<!--	<li class="wow fadeInUp" data-wow-duration="1s" data-wow-delay=".3s">
 					<div class="score-info score-average score-item8">
 						<h4>Cooywriting - <span class="highlight-yellow">AVERAGE</span></h4>
 						<p>The immediate first reaction from a user</p>
 					</div>
-				</li>
+				</li> -->
 			</ul>
-			<div class="score-body score-item7-info hide-mobile">
+	<!--	<div class="score-body score-item7-info hide-mobile">
 				<p>But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness.</p>
 				<p>No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful.</p>
 			</div>
@@ -312,7 +375,7 @@
 				<p>But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness.</p>
 				<p>No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful.</p>
 			</div>
-			</ul>
+			</ul> -->
 		</div>
 	</div>
 	
